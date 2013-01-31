@@ -128,17 +128,16 @@ describe('Client', function() {
 
   describe('queryIndex()', function(){
     it('should be able to perform a query', function(done){
-      server.queryIndex('Artists', { query : { 'Name' : 'AC/DC' }, 'waitForNonStaleResults' : true }, function (error, result) {
+      server.queryIndex('Artists', { query : { 'Name' : 'AC/DC' }, 'waitForNonStaleResults' : true }, function (error, result, response) {
         should.not.exist(error);
         should.exist(result);
-        should.exist(result.response);
-        should.exist(result.result);
-        result.result.IndexName.should.equal('Artists');
-        result.result.IsStale.should.be.false;
-        result.result.TotalResults.should.equal(1);
-        result.result.should.have.property('Results');
-        result.result.Results.should.be.an.instanceof(Array);
-        result.result.Results.should.have.length(1);
+        should.exist(response);
+        result.IndexName.should.equal('Artists');
+        result.IsStale.should.be.false;
+        result.TotalResults.should.equal(1);
+        result.should.have.property('Results');
+        result.Results.should.be.an.instanceof(Array);
+        result.Results.should.have.length(1);
         done();
       });
     })
@@ -146,14 +145,13 @@ describe('Client', function() {
       server.queryIndex('Artists', { query : { 'Name' : 'A*', 'Id' : 'artists/1' }, 'waitForNonStaleResults' : true }, function (error, result) {
         should.not.exist(error);
         should.exist(result);
-        should.exist(result.response);
-        should.exist(result.result);
-        result.result.IndexName.should.equal('Artists');
-        result.result.IsStale.should.be.false;
-        result.result.TotalResults.should.equal(14);
-        result.result.should.have.property('Results');
-        result.result.Results.should.be.an.instanceof(Array);
-        result.result.Results.should.have.length(14);
+        should.exist(response);
+        result.IndexName.should.equal('Artists');
+        result.IsStale.should.be.false;
+        result.TotalResults.should.equal(14);
+        result.should.have.property('Results');
+        result.Results.should.be.an.instanceof(Array);
+        result.Results.should.have.length(14);
         done();
       });
     })  
